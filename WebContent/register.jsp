@@ -8,126 +8,172 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
+    <link rel="stylesheet" href="page/user-register/demo.css">
+		<link rel="stylesheet" href="page/user-register/sky-forms.css">
+		<script src="jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+		<script src="jquery/jquery.validate.min.js" type="text/javascript"></script>
 <title>注册</title>
 </head>
-<body>
-<form action="personInfo/add.do" method="post" enctype="multipart/form-data">
-姓名：<input type="text" name="name" /><br/>
-性别：<input type="radio" name="gender" value="1" checked="checked" />男
- <input type="radio" name="gender" value="0" />女<br/>
-邮箱：<input type="text" name="email" /><br/>
-头像：<input type="file" name="image" /><br/>
-类型：<input type="radio" name="userType" checked="checked" value="1" />普通用户
- <input type="radio" name="userType" value="0" />商店店主<br/>
- <input type="submit" value="提交 " />
-</form>
+<body class="bg-cyan">
 
-<table border="1" width="100%">
-			<tr>
-				<td>
-					<!-- LOGO部分 -->
-					<table width="100%">
-						<tr height="40">
-							<td>
-								<img src="img/index/logo2.png"/>
-							</td>
-							<td>
-								<img src="img/index/header.jpg"/>
-							</td>
-							<td>
-								<a href="#">登录</a>
-								<a href="#">注册</a>
-								<a href="#">购物车</a>
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr bgcolor="black" height="30">
-				<td>
-					<a href="#"><font color="white">首页</font></a>&nbsp;&nbsp;&nbsp;  
-					<a href="#"><font color="white">手机数码</font></a>&nbsp;&nbsp;&nbsp;  
-					<a href="#"><font color="white">电脑办公</font></a>&nbsp;&nbsp;&nbsp;        
-					<a href="#"><font color="white">鞋靴箱包</font></a>&nbsp;&nbsp;&nbsp; 
-					<a href="#"><font color="white">鞋靴箱包</font></a>&nbsp;&nbsp;&nbsp;
-				</td>
-			</tr>
-			<tr height="600">
-				<td>
-					<table width="100%" height="100%" background="img/register/regist_bg.jpg">
-						<tr>
-							<td align="center">
-								<table width="60%" height="80%" border="1" bgcolor="white">
-									<tr>
-										<td>
-											<form>
-											<table width="100%" height="100%" border="0" align="center" cellspacing="10">
-												<tr>
-													<td>用户名</td>
-													<td><input type="text" name="username"/></td>
-												</tr>
-												<tr>
-													<td>密码</td>
-													<td><input type="password" name="password"/></td>
-												</tr>
-												<tr>
-													<td>确认密码</td>
-													<td><input type="password" name="repassword"/></td>
-												</tr>
-												<tr>
-													<td>性别</td>
-													<td><input type="radio" name="sex" value="男" checked="checked"/>男<input type="radio" name="sex" value="女"/>女</td>
-												</tr>
-												<tr>
-													<td>Email</td>
-													<td><input type="text" name="email"/></td>
-												</tr>
-												<tr>
-													<td>姓名</td>
-													<td><input type="text" name="name"/></td>
-												</tr>
-												<tr>
-													<td>生日</td>
-													<td><input type="text" name="birthday"/></td>
-												</tr>
-												<tr>
-													<td>验证码</td>
-													<td><input type="text" name="checkcode" size="10"/></td>
-												</tr>
-												<tr>
-													<td colspan="2"><input type="submit" value="注册"/></td>
-												</tr>
-											</table>
-											</form>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<img src="/img/index/footer.jpg" width="100%"/>
-				</td>
-			</tr>
-			<tr>
-				<td align="center">
-				    <a href="..">关于我们</a>
-				    <a href="">联系我们</a>
-				    <a href="">招贤纳士</a>
-				    <a href="">法律声明</a>
-				    <a href="..">友情链接</a>
-				    <a href="">支付方式</a>
-				    <a href="">配送方式</a>
-				    <a href="">服务声明</a>
-				    <a href="">广告声明</a>
-					<br/>
-					Copyright © 2005-2016 传智商城 版权所有 
-				</td>
-			</tr>
-		</table>
+		<div class="body body-s">		
+			<form action="personInfo/add.do" method="post" enctype="multipart/form-data" id="sky-form" class="sky-form">
+				<header>用户注册</header>
+				
+				<fieldset>					
+					<section>
+						<label class="input">
+							<i class="icon-append icon-user"></i>
+							<input type="text" name="name" placeholder="姓名">
+						</label>
+					</section>
+					
+					<section>
+						<label class="input">
+							<i class="icon-append icon-envelope-alt"></i>
+							<input type="email" name="email" placeholder="邮箱地址">
+						</label>
+					</section>
+
+				</fieldset>
+
+				<fieldset>					
+					
+					<section>
+						请选择头像图片上传：
+						<label class="input">
+							<i class="icon-append icon-envelope-alt"> </i>
+							<input type="file" name="image" placeholder="头像图片" /> 
+						</label>
+					</section>
+
+				</fieldset>
+					
+				<fieldset>	
+					<section>
+						<label class="select">
+							<select name="gender">
+								<option value="2" selected disabled>性别</option>
+								<option value="1">男</option>
+								<option value="0">女</option>
+							</select>
+							<i></i>
+						</label>
+					</section>
+					<section>
+						<label class="select">
+							<select name="userType">
+								<option value="0" selected disabled>用户类型</option>
+								<option value="1">普通用户</option>
+								<option value="2">商店店主</option>
+							</select>
+							<i></i>
+						</label>
+					</section>
+				</fieldset>
+				
+				<footer>
+					<button type="submit" class="button">提交</button>
+				</footer>
+			</form>			
+		</div>
+		
+		<script type="text/javascript">
+			$(function()
+			{
+				// Validation		
+				$("#sky-form").validate(
+				{					
+					// Rules for form validation
+					rules:
+					{
+						username:
+						{
+							required: true
+						},
+						email:
+						{
+							required: true,
+							email: true
+						},
+						password:
+						{
+							required: true,
+							minlength: 3,
+							maxlength: 20
+						},
+						passwordConfirm:
+						{
+							required: true,
+							minlength: 3,
+							maxlength: 20,
+							equalTo: '#password'
+						},
+						firstname:
+						{
+							required: true
+						},
+						lastname:
+						{
+							required: true
+						},
+						gender:
+						{
+							required: true
+						},
+						terms:
+						{
+							required: true
+						}
+					},
+					
+					// Messages for form validation
+					messages:
+					{
+						login:
+						{
+							required: 'Please enter your login'
+						},
+						email:
+						{
+							required: 'Please enter your email address',
+							email: 'Please enter a VALID email address'
+						},
+						password:
+						{
+							required: 'Please enter your password'
+						},
+						passwordConfirm:
+						{
+							required: 'Please enter your password one more time',
+							equalTo: 'Please enter the same password as above'
+						},
+						firstname:
+						{
+							required: 'Please select your first name'
+						},
+						lastname:
+						{
+							required: 'Please select your last name'
+						},
+						gender:
+						{
+							required: 'Please select your gender'
+						},
+						terms:
+						{
+							required: 'You must agree with Terms and Conditions'
+						}
+					},					
+					
+					// Do not change code below
+					errorPlacement: function(error, element)
+					{
+						error.insertAfter(element.parent());
+					}
+				});
+			});			
+		</script>
 
 
 </body>
