@@ -47,6 +47,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 </div>
 
+<h2><a href="product/addInit.do?sid=${shop.shopId }">添加商品</a></h2>
+
 </body>
 </html>
 

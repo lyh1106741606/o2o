@@ -5,6 +5,8 @@ import java.util.List;
 import com.ustb.o2o.entity.Shop;
 
 public interface ShopBiz {
+	Shop selectShopById(Integer sid);
+	
 	int addShop(Shop shop);
 	
 	int updateShopEnableStatusByShopId(Integer shopId , Integer enableStatus);

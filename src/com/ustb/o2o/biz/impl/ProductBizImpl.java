@@ -74,4 +74,8 @@ public class ProductBizImpl implements ProductBiz {
 		product.setLastEditTime(new Date());
 		return productMapper.updateByPrimaryKeySelective(product);
 	}
+	public int addproduct(Product product) {
+		// TODO Auto-generated method stub
+		return productMapper.insert(product);
+	}
 }

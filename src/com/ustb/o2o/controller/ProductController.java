@@ -1,18 +1,25 @@
 package com.ustb.o2o.controller;
 
+import java.io.File;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.ustb.o2o.entity.ProductCategory;
+import com.ustb.o2o.entity.Shop;
 import com.ustb.o2o.biz.LocalAuthBiz;
 import com.ustb.o2o.biz.PersonInfoBiz;
 import com.ustb.o2o.biz.ProductBiz;
 import com.ustb.o2o.biz.ProductCategoryBiz;
+import com.ustb.o2o.biz.ShopBiz;
 import com.ustb.o2o.entity.PersonInfo;
 import com.ustb.o2o.entity.Product;
 import com.ustb.o2o.entity.ProductCategory;
@@ -28,6 +35,8 @@ public class ProductController {
 	private PersonInfoBiz personInfoBiz;
 	@Autowired
 	private LocalAuthBiz localAuthBiz;
+	@Autowired
+	private ShopBiz shopBiz;
 	//根据商品的ID显示旗下所有商品
 	@RequestMapping(value="cateId")
 	public String prodByCateId(HttpSession session, Map map, Integer productCategoryId) {
@@ -142,8 +151,9 @@ public class ProductController {
 						session.setAttribute("person", person);
 						productBiz.updateProductEnableStatusByProductId(productId, option);
 					}
-					
-				   return "redirect:/shop/ownerManageShopInit.do";
+					Shop shop= (Shop)session.getAttribute("shop");
+					int sid = shop.getShopId();
+				   return "redirect:/shop/detail.do?shopId="+sid;
 					
 				}
 
@@ -153,6 +163,44 @@ public class ProductController {
 		Product product = productBiz.selectByPrimaryKey(productId);
 		session.setAttribute("product", product);
 		return "product_detail";
+	}
+	
+	@RequestMapping(value="add")
+	public String add(MultipartFile imgAddr,Product product,
+			HttpServletRequest request, HttpSession session)
+	throws Exception
+	{
+		
+		Shop shop = (Shop)session.getAttribute("shop");
+		if(imgAddr!=null&& imgAddr.getOriginalFilename()!=null) {
+			String filename = imgAddr.getOriginalFilename();
+			String savepath = request.getServletContext()
+					.getRealPath("/prod_image/"+filename);
+			File file= new File(savepath);
+			imgAddr.transferTo(file);
+			product.setImgAddr(filename);
+		}
+		product.setCreateTime(new Date());
+		product.setEnableStatus(1);
+		product.setLastEditTime(new Date());
+		product.setPriority(0);
+		
+		//Shop shop = (Shop)session.getAttribute("shop");
+		Integer sid = shop.getShopId();
+		product.setShopId(shop.getShopId());
+		
+		productBiz.addproduct(product);
+		return "redirect:/shop/detail.do?shopId="+sid;
+	}
+	
+	@RequestMapping(value="addInit")
+	public String addInit(Integer sid,HttpSession session)
+	{
+		List<ProductCategory> productcategoryList = productCategoryBiz.selectAll();
+		session.setAttribute("productcategoryList", productcategoryList);
+		Shop shop = shopBiz.selectShopById(sid);
+		session.setAttribute("shop", shop);
+		return "addproduct";
 	}
 	
 }

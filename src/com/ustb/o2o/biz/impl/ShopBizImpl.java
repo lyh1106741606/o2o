@@ -54,4 +54,9 @@ public class ShopBizImpl implements ShopBiz {
 	public List<Shop> selectShopByUserId(Integer userId) {
 		return shopMapper.selectShopByUserId(userId);
 	}
+	public Shop selectShopById(Integer sid) {
+		// TODO Auto-generated method stub
+		return shopMapper.selectByPrimaryKey(sid);
+	}
+	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import com.ustb.o2o.entity.Product;
 
 public interface ProductBiz {
+	int addproduct(Product product);
 	List<Product> selectByProdCateId(Integer productCategoryId);
 	List<Product> selectByProdName(String productName);
 	List<Product> selectByShopId(Integer shopId);
