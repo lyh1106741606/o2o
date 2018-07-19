@@ -78,4 +78,9 @@ public class ProductBizImpl implements ProductBiz {
 		// TODO Auto-generated method stub
 		return productMapper.insert(product);
 	}
+	public int delproduct(Integer pid) {
+		// TODO Auto-generated method stub
+		return productMapper.deleteByPrimaryKey(pid);
+	}
+	
 }

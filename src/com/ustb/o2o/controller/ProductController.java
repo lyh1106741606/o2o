@@ -149,7 +149,7 @@ public class ProductController {
 						return "redirect:/login.jsp";
 					}else {
 						session.setAttribute("person", person);
-						productBiz.updateProductEnableStatusByProductId(productId, option);
+						productBiz.delproduct(productId);
 					}
 					Shop shop= (Shop)session.getAttribute("shop");
 					int sid = shop.getShopId();
@@ -166,18 +166,18 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="add")
-	public String add(MultipartFile imgAddr,Product product,
+	public String add(MultipartFile image,Product product,
 			HttpServletRequest request, HttpSession session)
 	throws Exception
 	{
 		
 		Shop shop = (Shop)session.getAttribute("shop");
-		if(imgAddr!=null&& imgAddr.getOriginalFilename()!=null) {
-			String filename = imgAddr.getOriginalFilename();
+		if(image!=null&& image.getOriginalFilename()!=null) {
+			String filename = image.getOriginalFilename();
 			String savepath = request.getServletContext()
-					.getRealPath("/prod_image/"+filename);
+					.getRealPath("/image/floor/"+filename);
 			File file= new File(savepath);
-			imgAddr.transferTo(file);
+			image.transferTo(file);
 			product.setImgAddr(filename);
 		}
 		product.setCreateTime(new Date());
