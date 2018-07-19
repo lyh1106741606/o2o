@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="form-group">
 	<input type="password" required="required" class="form-control" name="password" id="password"/>
 	<label class="form-label">密　码</label>
-  </div><a >忘记密码 ?  </a>
+  </div><a href="register.jsp"> 注册  </a>
   <button class="floating-btn" type="submit"><i class="icon-arrow"></i></button>
 </div>
 </form>
