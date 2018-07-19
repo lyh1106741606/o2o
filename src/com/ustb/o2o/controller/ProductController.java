@@ -118,7 +118,7 @@ public class ProductController {
 				}
 				//管理员管理商品
 				@RequestMapping(value="adminManageProduct")
-				public String adminManageProduct(HttpSession session, Map map , Integer productId, Integer option) {
+				public String adminManageProduct(HttpSession session, Integer productId, Integer option) {
 					PersonInfo person = (PersonInfo)session.getAttribute("person");
 					//如果session中没有person，则重新登陆
 					if(person == null) {
@@ -127,7 +127,24 @@ public class ProductController {
 						session.setAttribute("person", person);
 						productBiz.updateProductEnableStatusByProductId(productId, option);
 					}
-					return "redirect:/product/adminManageProductInit.do";
+					
+				   return "redirect:/product/adminManageProductInit.do";
+					
+				}
+				//店家停止出售商品
+				@RequestMapping(value="ownerDeleteProduct")
+				public String OwnerDeleteProduct(HttpSession session, Integer productId, Integer option) {
+					PersonInfo person = (PersonInfo)session.getAttribute("person");
+					//如果session中没有person，则重新登陆
+					if(person == null) {
+						return "redirect:/login.jsp";
+					}else {
+						session.setAttribute("person", person);
+						productBiz.updateProductEnableStatusByProductId(productId, option);
+					}
+					
+				   return "redirect:/shop/ownerManageShopInit.do";
+					
 				}
 
 		

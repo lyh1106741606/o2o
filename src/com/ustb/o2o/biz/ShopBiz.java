@@ -13,6 +13,8 @@ public interface ShopBiz {
 	
 	List<Shop> selectShopByAreaId(Integer areaId);
 	
+	List<Shop> selectShopByUserId(Integer userId); 
+	
 	List<Shop> selectShopByShopCategoryId(Integer shopCategoryId);
 	
 	List<Shop> selectShopByEnableStatus(Integer enableStatus);

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ustb.o2o.biz.AreaBiz;
+import com.ustb.o2o.biz.ProductBiz;
 import com.ustb.o2o.biz.ShopBiz;
 import com.ustb.o2o.biz.ShopCategoryBiz;
 import com.ustb.o2o.entity.Area;
@@ -31,6 +32,8 @@ public class ShopController {
 	private ShopCategoryBiz shopCategoryBiz;
 	@Autowired
 	private ShopBiz shopBiz;
+	@Autowired
+	private ProductBiz productBiz;
 	@RequestMapping(value="addInit")
 	public String addInit(HttpSession session) {
 		List<ShopCategory> shopCategoryList = shopCategoryBiz.selectAll();
@@ -43,13 +46,13 @@ public class ShopController {
 	public String add(MultipartFile image, Shop shop, HttpServletRequest request, HttpSession session) throws Exception{
 		if(image != null && image.getOriginalFilename() != null) {
 			String fileName = image.getOriginalFilename();
-			String savePath = request.getServletContext().getRealPath("/shop_images/" + fileName);
+			String savePath = request.getServletContext().getRealPath("/image/shop" + fileName);
 			File file = new File(savePath);
 			image.transferTo(file);
 			shop.setShopImg(fileName);
 		}
 		shop.setCreateTime(new Date());
-		shop.setEnableStatus(1);
+		shop.setEnableStatus(0);
 		shop.setLastEditTime(new Date());
 		shop.setAdvice("新申请");
 		//获取登陆用户信息
@@ -88,5 +91,44 @@ public class ShopController {
 					shopBiz.updateShopEnableStatusByShopId(shopId, option);
 				}
 				return "redirect:/shop/adminManageShopInit.do";
+			}
+			//店家管理商店初始化
+			@RequestMapping(value="ownerManageShopInit")
+			public String ownerManageShopInit(HttpSession session, Map map ) {
+				PersonInfo person = (PersonInfo)session.getAttribute("person");
+				//如果session中没有person，则重新登陆
+				if(person == null) {
+					return "redirect:/login.jsp";
+				}else {
+				int userId = person.getUserId();
+				session.setAttribute("person", person);
+				//查询自己的商店
+				List<Shop> shopList = shopBiz.selectShopByUserId(userId);
+				map.put("shopList", shopList);
+				}
+				return "owner_manage_shop";
+			}
+			//店家管理商店
+			@RequestMapping(value="ownerManageShop")
+			public String ownerManageShop(HttpSession session, Map map , Integer option , Integer shopId) {
+				PersonInfo person = (PersonInfo)session.getAttribute("person");
+				//如果session中没有person，则重新登陆
+				if(person == null) {
+					return "redirect:/login.jsp";
+				}else {
+					session.setAttribute("person",person);
+					shopBiz.updateShopEnableStatusByShopId(shopId, option);
+				}
+				return "redirect:/shop/ownerManageShopInit.do";
+			}
+			@RequestMapping(value="detail")
+			public String shopDetail(HttpSession session, Integer shopId , Map map) {
+				Shop shop = shopBiz.selectByPrimaryKey(shopId);
+				session.setAttribute("shop", shop);
+				
+				List<Product> productList = productBiz.selectByShopId(shopId);
+				map.put("productList", productList);
+				
+				return "shop_detail";
 			}
 }

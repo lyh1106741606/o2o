@@ -37,7 +37,7 @@
     select 
     <include refid="Base_Column_List" />
     from tb_shop
-    where owner_id = #{userId}
+    where owner_id = #{userId} and enable_status = 1
   </select>
    <select id="selectShopByEnableStatus" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

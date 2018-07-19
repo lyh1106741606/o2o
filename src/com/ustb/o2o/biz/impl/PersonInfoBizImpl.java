@@ -1,5 +1,6 @@
 package com.ustb.o2o.biz.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ public class PersonInfoBizImpl implements PersonInfoBiz {
 	public int updataPersonInfoEnableStatusByUserId(Integer userId, Integer enableStatus) {
 		PersonInfo person = personInfoMapper.selectByPrimaryKey(userId);
 		person.setEnableStatus(enableStatus);
+		person.setLastEditTime(new Date());
 		return personInfoMapper.updateByPrimaryKeySelective(person);
 	}
 	@Override

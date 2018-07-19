@@ -8,9 +8,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-<title>普通用户</title>
+<title>管理界面</title>
 </head>
-<body>
-欢迎你，${person.name }，登陆成功！
-</body>
+<frameset rows="150,*,100" frameborder="no">
+	<frame src="shop_manager.jsp" noresize="noresize" />
+	<frameset cols="150,*" frameborder="no">
+		<frame src="owner_manage_shop.jsp" noresize="noresize" name="leftFrame"/>	
+		<frame src="shop_detail.jsp" name="centerFrame"/>	
+	</frameset>
+	<frame src="#" noresize="noresize" />
+</frameset>
+
 </html>

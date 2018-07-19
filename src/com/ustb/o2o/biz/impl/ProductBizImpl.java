@@ -1,6 +1,7 @@
 package com.ustb.o2o.biz.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,7 @@ public class ProductBizImpl implements ProductBiz {
 	public int updateProductEnableStatusByProductId(Integer productId, Integer enableStatus) {
 		Product product = productMapper.selectByPrimaryKey(productId);
 		product.setEnableStatus(enableStatus);
+		product.setLastEditTime(new Date());
 		return productMapper.updateByPrimaryKeySelective(product);
 	}
 }

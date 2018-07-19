@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 	欢迎：${personInfo.name }<br/>
-	<img src="head_images/${personInfo.profileImg }" width="100" height="100" /><br/>
+	<img src="image/person/${personInfo.profileImg }" width="100" height="100" /><br/>
 	<h2>请设置登录的用户名和密码</h2>
 	<form action="auth/add.do" method="post">
 用户编号：<input type="text" name="userId" readonly="readonly" value="${personInfo.userId }" /><br/>

@@ -27,7 +27,7 @@ public class PersonInfoController {
 		//判断是否有上传的图像
 		if(image != null && image.getOriginalFilename() != null) {
 			String fileName = image.getOriginalFilename();
-			String savePath = request.getServletContext().getRealPath("/head_images/" + fileName);
+			String savePath = request.getServletContext().getRealPath("/image/person/" + fileName);
 			File file = new File(savePath);
 			image.transferTo(file);	//保存文件
 			personInfo.setProfileImg(fileName);	//设置用户头像名称

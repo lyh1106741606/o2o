@@ -12,7 +12,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 欢迎你，商店店主：${person.name }！<br/>
-<img alt="" src="head_images/${person.profileImg }" width="100" height="100" />
+<img alt="" src="image/person/${person.profileImg }" width="100" height="100" />
 <h2><a href="shop/addInit.do">我要开店</a></h2>
+<h2><a href="shop/ownerManageShopInit.do">管理店铺</a></h2>
 </body>
 </html>
