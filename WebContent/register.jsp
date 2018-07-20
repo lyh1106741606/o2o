@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					
 					<section>
 						请选择头像图片上传：
-						<label class="input">
+						<label class="input-file">
 							<i class="icon-append icon-envelope-alt"> </i>
 							<input type="file" name="image" placeholder="头像图片" /> 
 						</label>

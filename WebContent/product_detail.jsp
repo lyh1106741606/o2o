@@ -74,7 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="crumb">
             <div class="w">
                 <div class="crumb-con">
-                    <a class="link" href="main/init.do">MMall</a>
+                    <a class="link" href="main/init.do">BKMall</a>
                     <span>></span>
                     <span class="link-text">商品详情</span>
                 </div>
@@ -86,14 +86,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<h1>${product.productName }</h1>
 			</div >
 			<div align="center">
-			<img alt="${product.productName }" src="image/floor/${product.imgAddr }"  />
+			<img alt="${product.productName }" src="image/floor/${product.imgAddr }" width="200px" height="200px"/>
 			</div>
 			<div >
 			<h2>产品描述：${product.productDesc }</h2>
 			</div>
 			<div>
-			正常售价：${product.normalPrice }元 <br />
-			本店售价：${product.promotionPrice }元
+			<h3>正常售价：${product.normalPrice }元 </h3>
+			<h3>本店售价：${product.promotionPrice }元</h3>
 			</div>
         </div>
 

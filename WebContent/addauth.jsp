@@ -100,7 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						}
 					},
 					
-					// Messages for form validation
+					
 					messages:
 					{
 						login:
@@ -139,7 +139,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						}
 					},					
 					
-					// Do not change code below
+					
 					errorPlacement: function(error, element)
 					{
 						error.insertAfter(element.parent());
